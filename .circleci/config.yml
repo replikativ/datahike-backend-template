@@ -3,11 +3,12 @@ version: 2.1
 executors:
   leiningen:
     docker:
-      - image: cimg/clojure:openjdk-8-lein-2.9.3
+      - image: circleci/clojure:openjdk-8-lein-2.9.3
     environment:
       LEIN_ROOT: nbd
       JVM_OPTS: -Xmx3200m
     working_directory: /home/circleci/datahike
+
 jobs:
   setup:
     executor: leiningen
@@ -32,6 +33,7 @@ jobs:
           paths:
             - /home/circleci/.m2
             - /home/circleci/.lein
+
   unittest:
     executor: leiningen
     steps:
@@ -41,6 +43,7 @@ jobs:
           name: Run Unittests
           command: lein test
           no_output_timeout: 5m
+
   deploy:
     executor: leiningen
     steps:
@@ -48,6 +51,7 @@ jobs:
           at: /home/circleci
       - run:
           command: lein deploy clojars
+
 workflows:
   build_test_and_release:
     jobs:
