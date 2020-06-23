@@ -3,7 +3,7 @@ version: 2.1
 executors:
   leiningen:
     docker:
-      - image: circleci/clojure:openjdk-8-lein-2.9.3
+      - image: circleci/clojure:openjdk-8-lein
     environment:
       LEIN_ROOT: nbd
       JVM_OPTS: -Xmx3200m
@@ -34,14 +34,17 @@ jobs:
             - /home/circleci/.m2
             - /home/circleci/.lein
 
-  unittest:
+  integrationtest:
     executor: leiningen
+    docker:
+      - image: circleci/clojure:openjdk-8-lein
+      - image: circleci/dynamodb:latest
     steps:
       - attach_workspace:
           at: /home/circleci
       - run:
-          name: Run Unittests
-          command: lein test
+          name: Run Integrationtests
+          command: ./bin/run-integrationtest
           no_output_timeout: 5m
 
   deploy:
@@ -65,4 +68,4 @@ workflows:
               only: master
           requires:
             - setup
-            - unittest
+            - integrationtest
