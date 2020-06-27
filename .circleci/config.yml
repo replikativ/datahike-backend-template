@@ -38,7 +38,7 @@ jobs:
     executor: leiningen
     docker:
       - image: circleci/clojure:openjdk-8-lein
-      - image: circleci/dynamodb:latest
+      - image: <yourdb template>
     steps:
       - attach_workspace:
           at: /home/circleci
