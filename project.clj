@@ -5,4 +5,8 @@
   :url "http://<your handle>/datahike-<your store>"
   :dependencies [[org.clojure/clojure "1.10.1" :scope "provided"]
                  [environ "1.2.0"]
-                 [io.replikativ/datahike "0.3.1-SNAPSHOT"]])
+                 [io.replikativ/datahike "0.3.1-SNAPSHOT"]]
+  :deploy-repositories [["clojars" {:url "https://clojars.org/repo"
+                                    :username :env
+                                    :password :env
+                                    :sign-releases false}]])
