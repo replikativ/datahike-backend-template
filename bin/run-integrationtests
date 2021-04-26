@@ -19,4 +19,4 @@ function teardown() {
 
 CONTAINER_ID=$(setup)
 
-lein test
+TIMBRE_LEVEL=':fatal' bin/kaocha --focus :integration
