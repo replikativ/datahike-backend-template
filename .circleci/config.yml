@@ -21,10 +21,12 @@ workflows:
           requires:
             - tools/setup
       - tools/build:
+          jarname: "datahike-backend-template"
           context: dockerhub-deploy
           requires:
             - tools/setup
       - tools/deploy-snapshot:
+          jarname: "datahike-backend-template"
           context:
             - clojars-deploy
             - dockerhub-deploy
@@ -38,6 +40,7 @@ workflows:
             - tools/integrationtest
             - tools/build
       - tools/deploy-release:
+          jarname: "datahike-backend-template"
           context:
             - clojars-deploy
             - dockerhub-deploy
